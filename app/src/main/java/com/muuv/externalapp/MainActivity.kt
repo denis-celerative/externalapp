@@ -10,6 +10,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import com.muuv.externalapp.databinding.ActivityMainBinding
+import com.muuv.publicsdk.PublicSdkFacade
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,9 +29,12 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
+        val sdkMessage = PublicSdkFacade.getMessage("","")
         binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            sdkMessage?.let {
+                Snackbar.make(view, it, Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show()
+            }
         }
     }
 
